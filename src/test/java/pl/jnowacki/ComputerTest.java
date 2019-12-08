@@ -28,11 +28,30 @@ public class ComputerTest {
     private Computer computer;
 
     @Test
-    public void testMock() {
-        when(keyboard.readValue()).thenReturn("valuFromKeyboard");
+    public void shouldDisplay() {
+        when(keyboard.readValue()).thenReturn("valueFromKeyboard");
 
         computer.readValueFromKeyboardAndDisplayInput();
 
-        verify(screen, times(1)).showMessage("valuFromKeyboard");
+        verify(screen, times(1)).showMessage("valueFromKeyboard");
+    }
+
+    @Test
+    public void shouldPrintWithAllCaps() {
+        when(keyboard.readValue()).thenReturn("valueFromKeyboard");
+
+        computer.readValueFromKeyboardAndPrintToPrinterWithAllCaps();
+
+        verify(printer, times(1)).print("VALUEFROMKEYBOARD");
+    }
+
+    @Test
+    public void shouldDisplayAndPrint() {
+        when(keyboard.readValue()).thenReturn("valueFromKeyboard");
+
+        computer.readValueFromKeyboardAndDisplayInputToBothPrinterAndScreen();
+
+        verify(screen, times(1)).showMessage("valueFromKeyboard");
+        verify(printer, times(1)).print("valueFromKeyboard");
     }
 }
